@@ -1,0 +1,2 @@
+1、cp2k提交命令
+cp2k.popt -i file.inp -o file.out
