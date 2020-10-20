@@ -2,3 +2,40 @@
 cp2k.popt -i file.inp -o file.out
 
 2、cp2k教程
+
+1)如何计算能量和力
+输入文件
+Si_bulk8.inp: 主要输入文件,定义系统和作业参数
+# BASIS_SET、GTH_POTENTIALS可在 cp2k/data中找到，涵盖大多数常用元素。用户需要为给定的计算生成自己的主输入文件
+BASIS_SET:包含可用于此计算的基础集的参数的文件CP2K
+GTH_POTENTIALS:包含可用于此计算的伪可能参数的文件CP2K
+
+**inp详细介绍
+
+使用
+&SECTION
+
+KEYWORDS PARAMETER
+
+&SUBSECTION
+
+KEYWORDS PARAMETER
+
+&END SUBSECTION
+
+&END SECTION
+方式定义input文件
+
+#"GLOBAL"：包含运行的常规选项，如作业名称、运行类型等
+&GLOBAL
+  PROJECT Si_bulk8 #定义项目名称
+  RUN_TYPE ENERGY_FORCE #Type of run that you want to perform Geometry optimization
+  PRINT_LEVEL LOW
+&END GLOBAL
+
+
+
+
+
+
+
