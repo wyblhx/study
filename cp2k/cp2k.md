@@ -3,9 +3,13 @@
 ## cp2k教程
 ### 一、输入文件介绍
 *输入文件 ：inp文件、BASIS_SET、GTH_POTENTIALS*
+
 **Ⅰ** Si_bulk8.inp: 主要输入文件,定义系统和作业参数,BASIS_SET、GTH_POTENTIALS可在 cp2k/data中找到，涵盖大多数常用元素。用户需要为给定的计算生成自己的主输入文件
+
 **Ⅱ** BASIS_SET:包含可用于此计算的基础集的参数的文件CP2K
+
 **Ⅲ** GTH_POTENTIALS:包含可用于此计算的伪可能参数的文件CP2K
+
 #### 1、inp文件
 **一般inp文件是使用以下方式书写的：**
 
@@ -52,7 +56,7 @@ KEYWORDS PARAMETER
 2. RUN_TYPE：cp2k做那种计算，包括MC:蒙特卡洛，MD:分子动力学模拟，ENERGY_FORCE：静态能量和力计算
 3. PRINT_LEVEL：计算类型打印级别，也就是输出文件的详细程度
 
-<font color=black>
+<br/>
 
 &FORCE_EVAL
 
@@ -167,7 +171,7 @@ KEYWORDS PARAMETER
     &END FORCES
 
   &END PRINT
-  
+
 &END FORCE_EVAL
 
 **注：**
