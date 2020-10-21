@@ -4,7 +4,7 @@
 ### 一、输入文件介绍
 *输入文件 ：inp文件、BASIS_SET、GTH_POTENTIALS*
 
-**Ⅰ** Si_bulk8.inp: 主要输入文件,定义系统和作业参数,BASIS_SET、GTH_POTENTIALS可在 cp2k/data中找到，涵盖大多数常用元素。用户需要为给定的计算生成自己的主输入文件
+**Ⅰ** inp文件: 主要输入文件,定义系统和作业参数,BASIS_SET、GTH_POTENTIALS可在 cp2k/data中找到，涵盖大多数常用元素。用户需要为给定的计算生成自己的主输入文件
 
 **Ⅱ** BASIS_SET:包含可用于此计算的基础集的参数的文件CP2K
 
@@ -176,4 +176,12 @@ KEYWORDS PARAMETER
 
 **注：**
 1. METHOD：评估原子上的力的方法，QUICKSTEP：Electronic structure methods (DFT, ...)，FIST：Molecular Mechanics，QMMM：Hybrid quantum classical
-2. SUBSYS：
+2. SUBSYS：coordinates, topology, molecules and cell,定义计算中的模拟单元单元和原子的初始坐标，采用的坐标是笛卡尔坐标
+- KIND:description of the kind of the atoms 定义元素， ELEMENT ：原子种类
+- CELL:定义计算中使用的模拟单元单元格,单位是A，
+- COORD：定义原子坐标 格式为<ATOM_KIND> X Y Z
+3. DFT：self-consistent Kohn-Sham Density Functional Theory calculation
+- BASIS_SET_FILE_NAME 、POTENTIAL_FILE_NAME：设置参数文件
+- QS:控制参数，EPS_DEFAULT：设置容差
+- MGRID：定义在计算中使用的集成网格应如何设置
+- XC：定义了我们要使用的交换相关密度函数
