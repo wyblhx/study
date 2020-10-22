@@ -42,6 +42,8 @@ def log_in():
     for user in users:
         if username == user['username'] and password == user['password']:
             return True
+    else:
+        return False
 
 
 # 购物
@@ -60,6 +62,7 @@ def add_shoppingcart(goodsName):
                 is_log_in = log_in()
             else:
                 print('很遗憾，不能添加商品到购物车中')
+                break
 
 
 if __name__ == '__main__':
