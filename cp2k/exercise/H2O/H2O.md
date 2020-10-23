@@ -1,7 +1,9 @@
 ## cp2k联系，水分子的能量和力计算
 
 ### 流程图
-![cp2k执行计算H2O能量和力的流程图](![H2O.png](http://ww1.sinaimg.cn/thumbnail/007nrJjbgy1gjzkuny8mkj3169135q77.jpg))
+
+![water.png](https://ws1.sinaimg.cn/large/007nrJjbgy1gjzl3n3tdmj310c0jct91.jpg)
+
 ### 代码
 
 ```
