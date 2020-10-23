@@ -1,38 +1,10 @@
 ## cp2k联系，水分子的能量和力计算
 
 ### 流程图
-
-```mermaid
-
-graph LR
-H2O-->global(GLOBAL)
-H2O-->force_evel(FORCE_EVAL)
-
-global(GLOBAL) -->project(PROJECT:water)
-global(GLOBAL) --> run_type( RUN_TYPE:ENERGY_FORCE)
-global(GLOBAL) -->print_level(PRINT_LEVEL:LOW)
-
-force_evel(FORCE_EVAL)-->methods(METHOD)
-force_evel(FORCE_EVAL)-->subsys(SUBSYS)
-subsys(SUBSYS)-->cell(CELL)
-subsys(SUBSYS)-->topology(TOPOLOGY)
-subsys(SUBSYS)-->kind(KIND)
-subsys(SUBSYS)-->etc(....)
-force_evel(FORCE_EVAL)-->dft(DFT)
-dft(DFT)-->BASIS_SET_FILE_NAME-基础集文件
-dft(DFT)-->POTENTIAL_FILE_NAME-赝势文件
-dft(DFT)-->qs(QS)
-dft(DFT)-->poisson(POISSON)
-dft(DFT)-->scf(SCF)
-dft(DFT)-->mgrid(MGRID)
-dft(DFT)-->xc(XC)
-xc(XC)-->XC_FUNCTIONAL
-xc(XC)-->HF
-force_evel(FORCE_EVAL)-->print(PRINT)
-```
+![cp2k执行计算H2O能量和力的流程图](![H2O.png](http://ww1.sinaimg.cn/thumbnail/007nrJjbgy1gjzkuny8mkj3169135q77.jpg))
 ### 代码
-```
 
+```
 #用来设置项目名称(PROJECT_NAME)，计算类型打印级别(PRINT_LEVEL)等，其中&RUN_TYPE用来设置整个计算的类型（包括静态计算，几何优化到MD, MC等20多种计算）
 &GLOBAL
  PROJECT water #项目文件名称
