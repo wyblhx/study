@@ -1,9 +1,21 @@
-## cp2k联系，水分子的能量和力计算
+## H2O的计算
+```flow
+op=>operation: cp2k和deepmd的联和使用-H2O
+sub1=>subroutine: cp2k计算水分子的能量和力
+sub2=>subroutine: deepdata处理数据
+sub3=>subroutine: deepmd-kit训练数据
+e=>end: 结束
+op->sub1->sub2->sub3
+```
+
+## 一、cp2k计算水分子的能量和力
 
 ### 流程图
 
 ![H2O的能量和力的计算.jpg](http://ww1.sinaimg.cn/large/007nrJjbgy1gjzkuny8mkj3169135q77.jpg)
 
+### 水分子模型
+![water.png](http://ww1.sinaimg.cn/large/007nrJjbgy1gjzlwronzuj310c0jct91.jpg)
 ### 代码
 
 ```
@@ -109,3 +121,5 @@
 
 &END FORCE_EVAL
 ```
+
+### dpdata处理数据
