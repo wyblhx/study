@@ -3,7 +3,7 @@
 &GLOBAL
  PROJECT water #项目文件名称
  RUN_TYPE ENERGY_FORCE #任务类型:计算能量和力
- PRINT_LEVEL LOW
+ PRINT_LEVEL MEDIUM 
 &END GLOBAL
 
 
@@ -11,31 +11,6 @@
 &FORCE_EVAL
 
 	METHOD  Quickstep #计算方式,别名为QS
-	&SUBSYS
-	   	
-		#设定盒子大小
-		&CELL
-      ABC 6.0 6.0 6.0
-      PERIODIC NONE #设定边界条件，是否为周期性边界
-		&END CELL
-		
-		#读取坐标文件
-		&TOPOLOGY
-   		COORD_FILE_FORMAT xyz
-   		COORD_FILE_NAME water.xyz
-		&END TOPOLOGY
-		
-		#定义元素 H O
-   	&KIND H
-    	BASIS_SET  6-31Gxx #基础集
-    	POTENTIAL  ALL #赝势
-   	&END KIND
-   	&KIND O
-    	BASIS_SET  6-31Gxx
-    	POTENTIAL  ALL
-   	&END KIND
-	   
-	&END SUBSYS
 		
 	&DFT
 			#基础集文件名
@@ -92,6 +67,32 @@
     	&END XC
     	    	
 	&END DFT
+	
+	&SUBSYS
+	   	
+		#设定盒子大小
+		&CELL
+      ABC 6.0 6.0 6.0
+      PERIODIC NONE #设定边界条件，是否为周期性边界
+		&END CELL
+		
+		#读取坐标文件
+		&TOPOLOGY
+   		COORD_FILE_FORMAT xyz
+   		COORD_FILE_NAME water.xyz
+		&END TOPOLOGY
+		
+		#定义元素 H O
+   	&KIND H
+    	BASIS_SET  6-31Gxx #基础集
+    	POTENTIAL  ALL #赝势
+   	&END KIND
+   	&KIND O
+    	BASIS_SET  6-31Gxx
+    	POTENTIAL  ALL
+   	&END KIND
+	   
+	&END SUBSYS
 	
 	#输出
 	&PRINT
