@@ -152,5 +152,4 @@ cp2k_output.to_deepmd_npy('dpmd_npy')
 ```
 
 **运行后结果**
-![QQ图片20201024213847.png](http://ww1.sinaimg.cn/large/007nrJjbgy1gk0r5rcta9j30aw05ijrb.jpg)
-![QQ图片20201024214033.png](http://ww1.sinaimg.cn/large/007nrJjbgy1gk0r7mdkihj30f203n0sq.jpg)
+![QQ图片20201024204839.png](http://ww1.sinaimg.cn/mw690/007nrJjbgy1gk0rpqfljaj30hh09m0tt.jpg)
