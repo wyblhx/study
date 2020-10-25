@@ -1,32 +1,22 @@
-## cp2k提交命令
-**cp2k.popt -i file.inp -o file.out**
+
 ## cp2k教程
+
+### cp2k提交命令
+**cp2k.popt -i file.inp -o file.out**
+
 ### 一、输入文件介绍
-*输入文件 ：inp文件、BASIS_SET、GTH_POTENTIALS*
 
-**Ⅰ** inp文件: 主要输入文件,定义系统和作业参数,BASIS_SET、GTH_POTENTIALS可在 cp2k/data中找到，涵盖大多数常用元素。用户需要为给定的计算生成自己的主输入文件
+**Ⅰ** input文件: 主要输入文件,定义系统和作业参数,BASIS_SET、GTH_POTENTIALS可在 cp2k/data中找到，涵盖大多数常用元素。用户需要为给定的计算生成自己的主输入文件
 
-**Ⅱ** BASIS_SET:包含可用于此计算的基础集的参数的文件CP2K
+**Ⅱ** 基础集文件及赝势文件
 
-**Ⅲ** GTH_POTENTIALS:包含可用于此计算的伪可能参数的文件CP2K
+**Ⅲ** 拓扑结构文件（xyz、cif）
 
-#### 1、inp文件
-**一般inp文件是使用以下方式书写的：**
+### input文件框架
 
-**&SECTION**  
+![DMH2.png](http://ww1.sinaimg.cn/mw690/007nrJjbly1gk1xam0w4yj30my0ait96.jpg)
 
-KEYWORDS PARAMETER  
-
-***&SUBSECTION***  
-
-KEYWORDS PARAMETER  
-
-***&END SUBSECTION***  
-
-  **&END SECTION**
-
-
-  **cp2k输入文件的8个Primary section：**
+  **8个Primary section：**
 
   **Ⅰ** GLOBAL： 用来设置项目名称(PROJECT_NAME)，计算类型打印级别(PRINT_LEVEL)等，其中&RUN_TYPE用来设置整个计算的类型（包括静态计算，几何优化到MD, MC等20多种计算）  
 
@@ -44,144 +34,44 @@ KEYWORDS PARAMETER
 
   **Ⅷ**  &DEBUG和&TEST  用于设置测试任务的参数
 
-#### 2、例子([如何计算能量和力](https://www.cp2k.org/howto:static_calculation))
+**1) GLOBAL**
+```
 &GLOBAL
-  PROJECT Si_bulk8 #定义项目名称
-  RUN_TYPE ENERGY_FORCE #Type of run that you want to perform Geometry optimization
-  PRINT_LEVEL LOW
+   PROJECT 项目名称
+   RUN_TYPE 任务类型
+   PRINT_LEVEL 输出级别控制
 &END GLOBAL
-
-**注：**
-1. PROJECT：inp文件名称
-2. RUN_TYPE：cp2k做那种计算，包括MC:蒙特卡洛，MD:分子动力学模拟，ENERGY_FORCE：静态能量和力计算
-3. PRINT_LEVEL：计算类型打印级别，也就是输出文件的详细程度
-
-<br/>
-
-&FORCE_EVAL
-
+```
+**2) FORCE_EVAL**
+```
+& FORCE_EVAL
   METHOD Quickstep
-
-  &SUBSYS
-
-    &KIND Si
-
-      ELEMENT   Si
-
-      BASIS_SET DZVP-GTH-PADE
-
-      POTENTIAL GTH-PADE-q4  
-
-    &END KIND
-
-    &CELL
-
-      A     5.430697500    0.000000000    0.000000000
-
-      B     0.000000000    5.430697500    0.000000000
-
-      C     0.000000000    0.000000000    5.430697500  
-
-    &END CELL
-
-    &COORD
-
-      Si    0.000000000    0.000000000    0.000000000
-
-      Si    0.000000000    2.715348700    2.715348700
-
-      Si    2.715348700    2.715348700    0.000000000
-
-      Si    2.715348700    0.000000000    2.715348700
-
-      Si    4.073023100    1.357674400    4.073023100
-
-      Si    1.357674400    1.357674400    1.357674400
-
-      Si    1.357674400    4.073023100    4.073023100
-
-      Si    4.073023100    4.073023100    1.357674400
-
-    &END COORD
-
-  &END SUBSYS
-
-  &DFT
-
-    BASIS_SET_FILE_NAME  BASIS_SET
-
-    POTENTIAL_FILE_NAME  GTH_POTENTIALS
-
-    &QS
-
-      EPS_DEFAULT 1.0E-10
-
-    &END QS
-
+  &DFT 核心部分
+    BASIS_SET_FILE_NAME 基础集文件
+    POTENTIAL_FILE_NAME 赝势文件，可在cp2k/data中获取
     &MGRID
-
-      NGRIDS 4
-
-      CUTOFF 300
-
-      REL_CUTOFF 60
-
+      CUTOFF  CUTOFF越大，越有效描述波函数信息，CUTOFF值取决于体系中元素种类
+      NGRIDS  使用的多重网格数
+      REL_CUTOFF  默认值是40Ry,设置为60Ry精度就足够了
     &END MGRID
-
-    &XC
-
-      &XC_FUNCTIONAL PADE
-
-      &END XC_FUNCTIONAL
-
-    &END XC
-
-    &SCF
-
-      SCF_GUESS ATOMIC
-
-      EPS_SCF 1.0E-7
-
-      MAX_SCF 300
-
-      &DIAGONALIZATION  ON
-
-        ALGORITHM STANDARD
-
-      &END DIAGONALIZATION
-
-      &MIXING  T
-
-        METHOD BROYDEN_MIXING
-
-        ALPHA 0.4
-
-        NBROYDEN 8
-
-      &END MIXING
-
+    &QS 设置Quickstep框架所需的参数
+    &END QS
+    &SCF 定义scf自洽过程的相关参数
+      EPS_SCF 精度
+      SCF_GUESS
+      MAX_SCF 最大迭代次数
     &END SCF
-
+    &XC  计算交换关联项所需的参数，解薛定谔方程时，有些能量是可以具体算出，但是有些能量是通过近似算出，对于不能得到准确的结果就归类于交换关联项中
+    &END XC
   &END DFT
-
-  &PRINT
-
-    &FORCES ON
-
-    &END FORCES
-
-  &END PRINT
-
-&END FORCE_EVAL
-
-**注：**
-1. METHOD：评估原子上的力的方法，QUICKSTEP：Electronic structure methods (DFT, ...)，FIST：Molecular Mechanics，QMMM：Hybrid quantum classical
-2. SUBSYS：coordinates, topology, molecules and cell,定义计算中的模拟单元单元和原子的初始坐标，采用的坐标是笛卡尔坐标
-- KIND:description of the kind of the atoms 定义元素， ELEMENT ：原子种类
-- CELL:定义计算中使用的模拟单元单元格,单位是A，
-- COORD：定义原子坐标 格式为<ATOM_KIND> X Y Z
-3. DFT：self-consistent Kohn-Sham Density Functional Theory calculation
-- BASIS_SET_FILE_NAME 、POTENTIAL_FILE_NAME：设置参数文件
-- QS:控制参数，EPS_DEFAULT：设置容差
-- MGRID：定义在计算中使用的集成网格应如何设置
-- XC：定义了我们要使用的交换相关密度函数
+  &SUBSYS  子系统：坐标，拓扑结构，分子和晶胞
+    &CELL
+    &END CELL
+    &COORD
+    &END COORD
+    &KIND 元素信息，包括基础文件和赝势文件
+    &END KIND
+  &END SUBSYS
+&END  FORCE_EVAL
+```
+### 输出文件分析
