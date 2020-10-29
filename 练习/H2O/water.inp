@@ -32,8 +32,11 @@
     	
     	#自洽场（SCF）
     	&SCF
+    		#CP2K中主要有两种SCF的收敛算法, 一种是基于轨道变换(OT)的算法, 一种是基于对角化(DIAG)的算法. 
+    		#如果体系有较大带隙的, 如为半导体或者绝缘体等, 推荐使用OT算法, 收敛速度比较快。
+    		#如果体系中HOMO-LUMO 带隙很小或者几乎没有, 如金属体系, 则建议使用对角化的方法进行计算并使用smear方法
       	EPS_SCF 1.0E-6 #收敛精度
-      	SCF_GUESS ATOMIC #Change the initial guess for the wavefunction
+      	SCF_GUESS ATOMIC 
       	MAX_SCF 10 #SCF优化迭代的最大次数
     	&END SCF
     	
