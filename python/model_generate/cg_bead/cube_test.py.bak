@@ -40,12 +40,12 @@ def cube_bond(cube):
             dz = cube[n2]['z'] - cube[n1]['z']
             r = dx * dx + dy * dy + dz * dz
             if r == dis * dis:
-	              bond['id'] = nbond + 1
-	              bond['type'] = 1
-	              bond['n1'] = cube[n1]['id']
-	              bond['n2'] = cube[n2]['id']
-	              cube_bond.append(bond)
-	              nbond += 1
+                bond['id'] = nbond + 1
+                bond['type'] = 1
+                bond['n1'] = cube[n1]['id']
+                bond['n2'] = cube[n2]['id']
+                cube_bond.append(bond)
+                nbond += 1
     return cube_bond
 
 cube=cube()
