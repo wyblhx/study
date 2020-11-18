@@ -1,3 +1,4 @@
+https://www.runoob.com/python/python-modules.html
 
 一.定义
 Python 模块(Module)，是一个 Python 文件，以 .py 结尾，包含了 Python 对象定义和Python语句。
@@ -108,3 +109,28 @@ reload(module_name)
 
 在这里，module_name要直接放模块的名字，而不是一个字符串形式。比如想重载 hello 模块，如下：
 reload(hello)
+
+9.Python中的包
+包是一个分层次的文件目录结构，它定义了一个由模块及子包，和子包下的子包等组成的 Python 的应用环境。
+简单来说，包就是文件夹，但该文件夹下必须存在 __init__.py 文件, 该文件的内容可以为空。__init__.py 用于标识当前文件夹是一个包。
+考虑一个在 package_runoob 目录下的 runoob1.py、runoob2.py、__init__.py 文件，test.py 为测试调用包的代码，目录结构如下：
+
+test.py
+package_runoob
+|-- __init__.py
+|-- runoob1.py
+|-- runoob2.py
+
+package_runoob/runoob1.py
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+def runoob1():
+   print "I'm in runoob1"
+
+package_runoob/runoob2.py
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+def runoob2():
+   print "I'm in runoob2"
