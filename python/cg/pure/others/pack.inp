@@ -11,12 +11,7 @@ structure single.pdb
 end structure
 
 
-#纳米颗粒填充
-#structure nano.pdb
-#	number 1 #生成数量
-#	radius 0.5 #设置纳米颗粒半径
-#	inside box 0.0 0.0 0.0 100.0 100.0 100.0 #xlo ylo zlo xhi yhi zhi
-#end structure
+
 
 
 
