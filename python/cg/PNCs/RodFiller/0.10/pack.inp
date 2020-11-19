@@ -1,0 +1,24 @@
+tolerance 0.3 #要求原子间距离不能小于多少
+
+output pack.pdb  #输出文件名
+
+filetype pdb #输出文件的格式，默认为pdb
+
+#聚合物模型的构建
+structure C:\Users\wy\Desktop\mygithub\study\python\cg\PNCs\RodFiller\single.pdb
+	number 100 #生成数量
+	inside box 0.0 0.0 0.0 80.0 80.0 80.0 #xlo ylo zlo xhi yhi zhi
+end structure
+
+
+#纳米颗粒填充
+structure C:\Users\wy\Desktop\mygithub\study\python\cg\PNCs\RodFiller\RodFiller.pdb
+	number 100 #生成数量
+	inside box 0.0 0.0 0.0 80.0 80.0 80.0 #xlo ylo zlo xhi yhi zhi
+end structure
+
+
+
+
+
+

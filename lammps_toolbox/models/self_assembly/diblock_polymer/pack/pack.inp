@@ -1,0 +1,18 @@
+tolerance 0.3 #要求原子间距离不能小于多少
+
+output pack.pdb  #输出文件名
+
+filetype pdb #输出文件的格式，默认为pdb
+
+#聚合物模型的构建
+structure single.pdb
+	number 2400 #生成数量
+	inside box 0.0 0.0 0.0 20.0 20.0 20.0 #xlo ylo zlo xhi yhi zhi
+end structure
+
+
+
+
+
+
+

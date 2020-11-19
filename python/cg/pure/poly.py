@@ -6,7 +6,7 @@
 import math
 import random
 
-number_mainchain = 50  # 主链原子数
+number_mainchain = 10  # 主链原子数
 
 natoms = 0
 natomtypes = 1
